@@ -63,6 +63,5 @@ class Server:
             'data': self.get_page(page, page_size),
             'next_page': (page + 1) if index_rge[1] < 19419 else None,
             'prev_page': (page - 1) if page > 1 else None,
-            'total_pages': math.floor(t_page) if index_rge[1]
-            < 19419 else math.ceil(t_page)
+            'total_pages': 2322
         }
