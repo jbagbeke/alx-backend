@@ -55,7 +55,6 @@ class Server:
         Returns a dictionary containing the following key-value pairs
         """
         index_rge = index_range(page, page_size)
-        t_page = 19419 / page_size
 
         return {
             'page_size': page_size,
@@ -63,5 +62,5 @@ class Server:
             'data': self.get_page(page, page_size),
             'next_page': (page + 1) if index_rge[1] < 19419 else None,
             'prev_page': (page - 1) if page > 1 else None,
-            'total_pages': 2322
+            'total_pages': 19419 // page_size
         }
