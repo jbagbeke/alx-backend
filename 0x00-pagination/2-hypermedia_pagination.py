@@ -54,6 +54,9 @@ class Server:
         """
         Returns a dictionary containing the following key-value pairs
         """
+        assert type(page) is int and type(page_size) is int
+        assert page > 0 and page_size > 0
+
         index_rge = index_range(page, page_size)
 
         return {
@@ -62,5 +65,5 @@ class Server:
             'data': self.get_page(page, page_size),
             'next_page': (page + 1) if index_rge[1] < 19419 else None,
             'prev_page': (page - 1) if page > 1 else None,
-            'total_pages': 19418 // page_size
+            'total_pages': math.ceil(19418 / page_size)
         }
