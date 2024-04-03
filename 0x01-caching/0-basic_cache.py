@@ -5,12 +5,11 @@ Caching system that inherits from BasicCache Class
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-
 class BasicCache(BaseCaching):
     """
     Basic Caching System
     """
-    
+
     def __init__(self):
         """
         Constructor method for class
@@ -28,7 +27,6 @@ class BasicCache(BaseCaching):
         """
         Returns value of key specified from Cache Data
         """
-
         key_value = self.cache_data.get(key)
 
         if not key_value or not key:
