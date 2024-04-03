@@ -16,7 +16,7 @@ class MRUCache(BaseCaching):
         Constructor method
         """
         super().__init__()
-        self.most_accessed = {}
+        self.most_access = {}
         self.mru_age = -1
 
     def put(self, key, item):
@@ -28,14 +28,14 @@ class MRUCache(BaseCaching):
             self.mru_age += 1
 
             if len(self.cache_data) > super().MAX_ITEMS:
-                most_key = max(self.most_accessed, key=self.most_accessed.get)
+                most_key = max(self.most_access, key=self.most_access.get)
 
                 del self.cache_data[most_key]
-                del self.most_accessed[most_key]
+                del self.most_access[most_key]
 
                 print('DISCARD: {}'.format(most_key))
 
-            self.most_accessed[key] = self.mru_age
+            self.most_access[key] = self.mru_age
 
     def get(self, key):
         """
@@ -47,6 +47,6 @@ class MRUCache(BaseCaching):
             return None
 
         self.mru_age += 1
-        self.most_accessed[key] = self.mru_age
+        self.most_access[key] = self.mru_age
 
         return key_value
