@@ -6,7 +6,7 @@ LIFO Caching class
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class LIFOCache(BaseCaching):
     """
     LIFO Caching Class with Base Caching as Base class
     """
