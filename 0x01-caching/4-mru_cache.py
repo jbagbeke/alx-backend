@@ -28,9 +28,7 @@ class MRUCache(BaseCaching):
             self.mru_age += 1
 
             if len(self.cache_data) > super().MAX_ITEMS:
-                most_value = max(self.most_accessed.values())
-                most_key = [key for key, val in self.most_accessed.items()
-                            if val == most_value][0]
+                most_key = max(self.most_accessed, key=self.most_accessed.get)
 
                 del self.cache_data[most_key]
                 del self.most_accessed[most_key]

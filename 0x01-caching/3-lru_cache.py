@@ -30,9 +30,7 @@ class LRUCache(BaseCaching):
             self.least_accessed[key] = self.lru_age
 
             if len(self.cache_data) > super().MAX_ITEMS:
-                least_value = min(self.least_accessed.values())
-                least_key = [key for key, val in self.least_accessed.items()
-                             if val == least_value][0]
+                least_key = min(self.least_accessed, key=self.least_accessed.get)
 
                 del self.cache_data[least_key]
                 del self.least_accessed[least_key]
