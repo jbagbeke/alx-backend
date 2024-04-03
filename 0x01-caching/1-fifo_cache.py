@@ -1,31 +1,37 @@
 #!/usr/bin/env python3
 """
-Caching system that inherits from BasicCache Class
+FIFO Caching class
 """
+
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-class BasicCache(BaseCaching):
+class FIFOCache(BaseCaching):
     """
-    Basic Caching System
+    FIFO Caching Class with Base Caching as Base class
     """
 
     def __init__(self):
         """
-        Constructor method for class
+        Constructor method
         """
         super().__init__()
 
     def put(self, key, item):
         """
-        Assigns item in a cache system
+        Stores Item in cache system
         """
         if key and item:
             self.cache_data[key] = item
 
+            if len(self.cache_data) > super().MAX_ITEMS:
+                firstKey = list(self.cache_data)[0]
+                del self.cache_data[firstKey]
+                print('DISCARD: {}'.format(firstKey))
+
     def get(self, key):
         """
-        Returns value of key specified from Cache Data
+        Returns Value of key specified
         """
         key_value = self.cache_data.get(key)
 
