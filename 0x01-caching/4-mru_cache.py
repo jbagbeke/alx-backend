@@ -25,19 +25,19 @@ class MRUCache(BaseCaching):
         """
         if key and item:
             self.cache_data[key] = item
-
             self.mru_age += 1
-            self.most_accessed[key] = self.mru_age
 
             if len(self.cache_data) > super().MAX_ITEMS:
                 most_value = max(self.most_accessed.values())
                 most_key = [key for key, val in self.most_accessed.items()
-                             if val == most_value][0]
+                            if val == most_value][0]
 
                 del self.cache_data[most_key]
                 del self.most_accessed[most_key]
 
                 print('DISCARD: {}'.format(most_key))
+
+            self.most_accessed[key] = self.mru_age
 
     def get(self, key):
         """
