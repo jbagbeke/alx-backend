@@ -16,7 +16,7 @@ class LRUCache(BaseCaching):
         Constructor method
         """
         super().__init__()
-        self.least_accessed = {}
+        self.least_access = {}
         self.lru_age = -1
 
     def put(self, key, item):
@@ -27,13 +27,13 @@ class LRUCache(BaseCaching):
             self.cache_data[key] = item
 
             self.lru_age += 1
-            self.least_accessed[key] = self.lru_age
+            self.least_access[key] = self.lru_age
 
             if len(self.cache_data) > super().MAX_ITEMS:
-                least_key = min(self.least_accessed, key=self.least_accessed.get)
+                least_key = min(self.least_access, key=self.least_access.get)
 
                 del self.cache_data[least_key]
-                del self.least_accessed[least_key]
+                del self.least_access[least_key]
 
                 print('DISCARD: {}'.format(least_key))
 
@@ -47,6 +47,6 @@ class LRUCache(BaseCaching):
             return None
 
         self.lru_age += 1
-        self.least_accessed[key] = self.lru_age
+        self.least_access[key] = self.lru_age
 
         return key_value
