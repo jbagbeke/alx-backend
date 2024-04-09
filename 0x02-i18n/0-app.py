@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def root_func():
+def root_func() -> str:
     """
     Basic flask app root
     """
