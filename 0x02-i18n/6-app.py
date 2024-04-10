@@ -46,7 +46,7 @@ def get_locale() -> str:
     if request.accept_languages.best_match(app.config['LANGUAGES']):
         return request.accept_languages.best_match(
                                             app.config['LANGUAGES'])
-    return 'en'
+    return app.config['BABEL_DEFAULT_LOCALE']
 
 
 def get_user(login_as):
