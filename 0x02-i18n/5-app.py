@@ -23,6 +23,13 @@ app.config.from_object(Config)
 
 babel = Babel(app)
 
+users = {
+    1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
+    2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
+    3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
+    4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
+}
+
 
 @babel.localeselector
 def get_locale() -> str:
@@ -38,21 +45,15 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-def get_user(login_as):
+def get_user():
     """
     Mock user login system
     with users acting as temporary db
     """
-
+    login_as = request.args.get('login_as', None)
+    
     if not login_as:
         return None
-
-    users = {
-        1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
-        2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
-        3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
-        4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
-    }
 
     user = users.get(int(login_as), None)
     return user
@@ -64,11 +65,8 @@ def before_request():
     Before request function
     Runs before actual request
     """
-    login_as = request.args.get('login_as', None)
-
-    if login_as:
-        user = get_user(login_as)
-        g.user = user
+    user = get_user()
+    g.user = user
 
 
 @app.route('/')
