@@ -2,7 +2,7 @@
 """
 Basic Flask setup
 """
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
@@ -21,9 +21,23 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
+@babel.localeselector
+def get_locale() -> str:
+    """
+    Babel Locale Selector
+    """
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+babel.init_app(app, locale_selector=get_locale)
+
+
 @app.route('/')
 def root_func() -> str:
     """
     Basic flask app root
     """
-    return render_template('1-index.html')
+    return render_template('3-index.html')
+
+
+if __name__ == '__main__':
+    app.run()

@@ -34,4 +34,4 @@ def root_func() -> str:
     """
     Basic flask app root
     """
-    return render_template('0-index.html')
+    return render_template('2-index.html')
