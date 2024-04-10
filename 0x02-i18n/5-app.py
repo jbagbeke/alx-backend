@@ -41,9 +41,6 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-babel.init_app(app, locale_selector=get_locale)
-
-
 def get_user(login_as: str = '0') -> Union[Dict, None]:
     """
     Mock user login system
