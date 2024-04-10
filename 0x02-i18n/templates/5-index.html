@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>{{ _('home_title') }}</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>{{ _('home_header') }}</H1>
+        {% if logged_in == 1 %}
+            {{ _('logged_in_as', username=username) }}
+        {% else %}
+            {{ _('not_logged_in') }}
+        {% endif %}
+    </BODY>
+</HTML>

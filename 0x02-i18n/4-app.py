@@ -38,4 +38,4 @@ def root_func() -> str:
     """
     Basic flask app root
     """
-    return render_template('3-index.html')
+    return render_template('4-index.html')
