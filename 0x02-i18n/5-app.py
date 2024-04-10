@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """
 Basic Flask setup
+With Babel implementations
 """
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request
+from flask import g
 from flask_babel import Babel, _
-from typing import Dict, Union
 
 
 class Config:
     """
     Babel Config Class
+    With config variable declarations
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = 'en'
