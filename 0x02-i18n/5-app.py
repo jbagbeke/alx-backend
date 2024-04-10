@@ -51,7 +51,7 @@ def get_user():
     with users acting as temporary db
     """
     login_as = request.args.get('login_as', None)
-    
+
     if not login_as:
         return None
 
@@ -60,7 +60,7 @@ def get_user():
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """
     Before request function
     Runs before actual request
