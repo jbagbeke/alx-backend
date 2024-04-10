@@ -4,7 +4,8 @@ Basic Flask setup
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
-from typing import Dict, Union
+import pytz
+from pytz.exceptions import UnknownTimeZoneError
 
 
 class Config:
@@ -33,20 +34,42 @@ users = {
 def get_locale() -> str:
     """
     Babel Locale Selector
-    based on best matched langauge setting specified
-    in header
     """
     locale = request.args.get('locale', None)
+
     if locale:
         if locale in app.config['LANGUAGES']:
             return locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+    locale = g.user
+
+    if locale:
+        return g.user.get("locale")
+
+    locale = request.accept_languages.best_match(app.config['LANGUAGES'])
+
+    if locale:
+        return locale
+
+    return app.config['BABEL_DEFAULT_LOCALE']
+
+
+@babel.timezoneselector
+def get_timezone():
+    """
+    Time zone selector
+    """
+    try:
+        tzname = request.headers.get('X-Timezone')
+        if tzname:
+            return pytz.timezone(tzname)
+    except UnknownTimeZoneError:
+        pass
 
 
 def get_user(login_as):
     """
     Mock user login system
-    with users acting as temporary db
     """
     if not login_as:
         return None
@@ -59,7 +82,6 @@ def get_user(login_as):
 def before_request():
     """
     Before request function
-    Runs before actual request
     """
     login_as = request.args.get('login_as', None)
 
@@ -71,7 +93,6 @@ def before_request():
 @app.route('/')
 def root_func() -> str:
     """
-    Basic flask app root handler
-    renders simple html file
+    Basic flask app root
     """
     return render_template('5-index.html')
