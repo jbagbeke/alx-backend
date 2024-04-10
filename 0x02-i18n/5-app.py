@@ -45,12 +45,15 @@ def get_user(login_as) -> Union[Dict, None]:
     """
     Mock user login system
     """
+    if not login_as:
+        return None
+
     user = users.get(int(login_as), None)
     return user
 
 
 @app.before_request
-def before_request() -> None:
+def before_request():
     """
     Before request function
     """
