@@ -46,7 +46,7 @@ def get_locale() -> str:
     user = get_user()
     if user:
         user_locale = user.get('locale')
-        if user_locale:
+        if user_locale and user_locale in app.config['LANGUAGES']:
             return user_locale
 
     headl = request.accept_languages.best_match(app.config['LANGUAGES'])
@@ -54,6 +54,8 @@ def get_locale() -> str:
         return headl
 
     return app.config['BABEL_DEFAULT_LOCALE']
+
+    # babel.init_app(app, locale_selector=get_locale)
 
 
 def get_user():
