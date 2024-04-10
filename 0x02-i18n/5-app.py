@@ -41,7 +41,7 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-def get_user(login_as: str = '0') -> Union[Dict, None]:
+def get_user(login_as) -> Union[Dict, None]:
     """
     Mock user login system
     """
