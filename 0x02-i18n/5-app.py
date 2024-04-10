@@ -48,8 +48,11 @@ def get_user(login_as):
     if not login_as:
         return None
 
-    user = users.get(int(login_as), None)
-    return user
+    try:
+        user = users.get(int(login_as))
+        return user
+    except Exception:
+        return None
 
 
 @app.before_request
@@ -60,7 +63,9 @@ def before_request():
     login_as = request.args.get('login_as', None)
 
     user = get_user(login_as)
-    g.user = user
+    
+    if user:
+        g.user = user
 
 
 @app.route('/')
