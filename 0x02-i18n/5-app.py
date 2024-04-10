@@ -44,14 +44,12 @@ def get_locale() -> str:
 babel.init_app(app, locale_selector=get_locale)
 
 
-def get_user(login_as: str = None) -> Union[Dict, None]:
+def get_user(login_as: str = '0') -> Union[Dict, None]:
     """
     Mock user login system
     """
-    if login_as:
-        user = users.get(int(login_as), None)
-        return user
-    return login_as
+    user = users.get(int(login_as), None)
+    return user
 
 
 @app.before_request
@@ -61,10 +59,7 @@ def before_request() -> None:
     """
     login_as = request.args.get('login_as', None)
 
-    if login_as:
-        user = get_user(login_as)
-    else:
-        user = None
+    user = get_user(login_as)
     g.user = user
 
 
@@ -73,11 +68,4 @@ def root_func() -> str:
     """
     Basic flask app root
     """
-    if g.user:
-        return render_template('5-index.html',
-                               logged_in=1,
-                               username=g.user.get('name'))
-    else:
-        return render_template('5-index.html',
-                               logged_in=0,
-                               username=None)
+    return render_template('5-index.html')
