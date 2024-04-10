@@ -23,13 +23,6 @@ app.config.from_object(Config)
 
 babel = Babel(app)
 
-users = {
-    1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
-    2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
-    3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
-    4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
-}
-
 
 @babel.localeselector
 def get_locale() -> str:
@@ -50,8 +43,16 @@ def get_user(login_as):
     Mock user login system
     with users acting as temporary db
     """
+
     if not login_as:
         return None
+
+    users = {
+        1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
+        2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
+        3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
+        4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
+    }
 
     user = users.get(int(login_as), None)
     return user
