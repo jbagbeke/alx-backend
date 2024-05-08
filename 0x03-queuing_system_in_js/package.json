@@ -1,0 +1,57 @@
+{
+  "name": "redis",
+  "description": "A modern, high performance Redis client",
+  "version": "4.6.13",
+  "type": "module",
+  "files": [
+    "dist/"
+  ],
+  "workspaces": [
+    "./packages/*"
+  ],
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint",
+    "check-lint": "lint [0-9]*.js",
+    "test": "./node_modules/.bin/mocha --require @babel/register --exit",
+    "dev": "nodemon --exec babel-node --presets @babel/preset-env"
+  },
+  "dependencies": {
+    "@redis/bloom": "1.2.0",
+    "@redis/client": "1.5.14",
+    "@redis/graph": "1.1.1",
+    "@redis/json": "1.0.6",
+    "@redis/search": "1.1.6",
+    "@redis/time-series": "1.0.5",
+    "chai-http": "^4.3.0",
+    "express": "^4.17.1",
+    "kue": "^0.11.6",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.0",
+    "@babel/core": "^7.8.0",
+    "@babel/node": "^7.8.0",
+    "@babel/preset-env": "^7.8.2",
+    "@babel/register": "^7.8.0",
+    "@tsconfig/node14": "^14.1.0",
+    "chai": "^4.2.0",
+    "gh-pages": "^6.0.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.2",
+    "release-it": "^16.1.5",
+    "request": "^2.88.0",
+    "sinon": "^7.5.0",
+    "typescript": "^5.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/redis/node-redis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/redis/node-redis/issues"
+  },
+  "homepage": "https://github.com/redis/node-redis",
+  "keywords": [
+    "redis"
+  ]
+}
